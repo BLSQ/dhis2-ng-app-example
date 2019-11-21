@@ -2,18 +2,89 @@
 
 ## Install
 
-- Install node & yarn
-- yarn global add @angular/cli
-- ng new dhis2-app
-- cd dhis2-app
-- yarn install
-- ng serve
+- Install node (https://nodejs.org/en/)
+- Instakk yarn (https://yarnpkg.com/lang/en/docs/install/#windows-stable)
+
+In the terminal:
+
+```bash
+yarn global add @angular/cli
+ng new dhis2-app
+cd dhis2-app
+yarn install
+ng serve
+```
 
 -> Should have an application running on port 4200
 
+```bash
 - ng add @angular/material
 - ng serve
 - Go to app.component.html, remove everything and add a simple &lt;h1>
+```
+
+## Prepare for deploy
+
+### Create a manifest
+
+Create a manifest and add is under src/
+
+```json
+{
+    "version": "9.9.9",
+    "name": "Medair Ng App",
+    "description": "Simplest app possible",
+    "launch_path": "index.html",
+    "appType": "APP",
+    "icons": {
+        "48": "assets/medair.png"
+    },
+    "developer": {
+        "name": "Martin Van Aken",
+        "url": "https://bluesquarehub.com/"
+    },
+    "default_locale": "en",
+    "activities": {
+        "dhis": {
+            "href": "*",
+            "namespace": "mva-medair-ng"
+        }
+    }
+}
+```
+
+Change the namespace so we don't have conflict on deployment.
+
+Tell angular to copy the manifest when building an app: in angular.json:
+
+```json
+  "assets": [
+      "src/favicon.ico",
+      "src/assets",
+      "src/manifest.webapp"
+    ],
+```
+
+Add an icon in the assets folder (be sure that the name matches the one in manifest.webapp)
+
+### Base url
+
+Finally, as the application will not run at the root, you need to update your baseUrl in index.html
+
+
+```html
+  <base href="./">
+```
+
+This will tell angular to serve all files from the application location, instead of the server root.
+
+### Create a production build:
+
+    ng build
+
+This will generate all the app in the "dist" folder.
+
+Zip the content of it, and upload it to DHIS2 using the App Management app - your brand new app should be there.
 
 ## Using existing components
 

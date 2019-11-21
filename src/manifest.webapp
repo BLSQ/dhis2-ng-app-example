@@ -1,0 +1,21 @@
+{
+    "version": "9.9.9",
+    "name": "Medair Ng App",
+    "description": "Simplest app possible",
+    "launch_path": "index.html",
+    "appType": "APP",
+    "icons": {
+        "48": "assets/medair.png"
+    },
+    "developer": {
+        "name": "Martin Van Aken",
+        "url": "https://bluesquarehub.com/"
+    },
+    "default_locale": "en",
+    "activities": {
+        "dhis": {
+            "href": "*",
+            "namespace": "mva-medair-ng"
+        }
+    }
+}
